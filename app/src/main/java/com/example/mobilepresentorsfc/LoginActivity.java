@@ -1,11 +1,12 @@
 package com.example.mobilepresentorsfc;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(code.length()!=4){
                     Toast.makeText(this, "code must contain 4 digits", Toast.LENGTH_LONG).show();
                 }else {
-                    CodeSendTask codeSendTask = new CodeSendTask(code);
-                    codeSendTask.execute();
+                    //CodeSendTask codeSendTask = new CodeSendTask(code);
+                    //codeSendTask.execute();
                     Intent mainIntent = new Intent(this, MainActivity.class);
                     mainIntent.putExtra("code", code);
                     startActivity(mainIntent);
