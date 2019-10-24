@@ -7,12 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
@@ -20,9 +22,11 @@ import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,24 +104,24 @@ public class VKLoginActivity extends AppCompatActivity {
 
                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VKLoginActivity.this, android.R.layout.simple_expandable_list_item_1, titles);
                         VKDocsListView.setAdapter(arrayAdapter);
-                        VKDocsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                File file = new File(Environment.getExternalStorageDirectory()
-                                        + "/Download/" + titles.get(position));
-                                if (file.exists()) {
-                                    URLSendTask urlSendTask2 = new URLSendTask(code,vkDocuments.get(position));
-                                    urlSendTask2.execute();
-                                    Intent intent = new Intent(context, PDFRenderActivity.class);
-                                    intent.putExtra("targetPDF", Environment.getExternalStorageDirectory()
-                                            + "/Download/" + titles.get(position));
-                                    context.startActivity(intent);
-                                } else {
-                                    URLSendTask urlSendTask2 = new URLSendTask(code,vkDocuments.get(position));
-                                    urlSendTask2.execute();
-                                    FileDownloadTask fileDownloadTask = new FileDownloadTask(context, titles.get(position), vkDocuments.get(position));
-                                    fileDownloadTask.execute(new String[]{vkDocuments.get(position)});
-                                }
+                        //VKDocsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                           // @RequiresApi(api = Build.VERSION_CODES.O)
+                            //public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                              //  File file = new File(Environment.getExternalStorageDirectory()
+                                     //   + "/Download/" + titles.get(position));
+                                //if (file.exists()) {
+                                   // URLSendTask urlSendTask2 = new URLSendTask(code,vkDocuments.get(position));
+                                   // urlSendTask2.execute();
+                                   // Intent intent = new Intent(context, PDFRenderActivity.class);
+                                   // intent.putExtra("targetPDF", Environment.getExternalStorageDirectory()
+                                           // + "/Download/" + titles.get(position));
+                                    //context.startActivity(intent);
+                                //} else {
+                                  //  URLSendTask urlSendTask2 = new URLSendTask(code,vkDocuments.get(position));
+                                  //  urlSendTask2.execute();
+                                  //  FileDownloadTask fileDownloadTask = new FileDownloadTask(context, titles.get(position), vkDocuments.get(position));
+                                  //  fileDownloadTask.execute(new String[]{vkDocuments.get(position)});
+                               // }
                             }
                         });
                     }
