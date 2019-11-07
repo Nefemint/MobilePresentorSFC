@@ -3,6 +3,8 @@ package com.example.mikhail.mobilepresentor;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.mobilepresentorsfc.MainActivity;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
