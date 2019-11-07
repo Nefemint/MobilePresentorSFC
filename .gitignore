@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+/MobilePresentorSFC/db.sqlite3
+
