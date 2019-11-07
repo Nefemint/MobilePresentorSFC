@@ -19,3 +19,80 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 ]
+
+
+
+# -*- coding: utf-8 -*-
+import pymysql
+import csv
+
+def csv_writer(data, path):
+    """
+    Функция для записи данных в CSV
+    """
+    with open(path, "a", newline='') as csv_file:
+        '''
+        csv_file - объект с данными
+        delimiter - разделитель
+        '''
+        writer = csv.writer(csv_file, delimiter=';')
+        print(data)
+        writer.writerow(data)
+        #for line in data:
+            #writer.writerow(line)
+
+
+
+
+def pars(name, mail):
+    connection = pymysql.connect(host='localhost',
+                             user='parser',
+                             password='Wzfuv175',
+                             db='newsite',
+                             charset='utf8',
+                             unix_socket= '/var/lib/mysql/mysql.sock')
+    with connection.cursor() as cursor:
+        i = 0
+        sql = "SELECT name FROM users"
+        cursor.execute(sql)
+        for row in cursor:
+            name1 = str(row)
+            name1 = name1.replace("(", "")
+            name1 = name1.replace(")", "")
+            name1 = name1.replace("'", "")
+            name1 = name1.replace(",", "")
+            #print(row)
+            name.append(name1)
+        sql = "SELECT mail FROM users"
+        cursor.execute(sql)
+        for row in cursor:
+            name1 = str(row)
+            name1 = name1.replace("(", "")
+            name1 = name1.replace(")", "")
+            name1 = name1.replace("'", "")
+            name1 = name1.replace(",", "")
+            mail.append(name1)
+        connection.close
+            #print(row)
+    return name, mail
+
+
+print('start parsing')
+path = "output11.csv"
+name = []
+mail = []
+pars(name, mail)
+fields = ['username', 'email', 'first_name', 'last_name']
+i = 0
+csv_writer(fields, path)
+'''
+while (i < len(name)):
+    t = []
+    print(name[i], mail[i])
+    t.append(name[i])
+    t.append(mail[i])
+    csv_writer(t, path)
+    i = i + 1
+    '''
+data = ['odu37308@eveav.com','odu37308@eveav.com','vasiliy', 'severyanov']
+csv_writer(data, path)
